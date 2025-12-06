@@ -12,9 +12,7 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
 
     Page<Student> findByNameContainingAndMajorContaining(String name, String major, Pageable pageable);
     
-    // Jika hanya perlu berdasarkan Nama (dan mengabaikan Jurusan)
     Page<Student> findByNameContaining(String name, Pageable pageable);
     
-    // Jika hanya perlu berdasarkan Jurusan (dan mengabaikan Nama)
     Page<Student> findByMajorContaining(String major, Pageable pageable);
 }
