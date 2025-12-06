@@ -49,7 +49,7 @@ Controller menerima request HTTP GET/POST, misalnya:
 ### 3. **Controller Meneruskan ke Service**
 Controller tidak berisi logika berat.  
 Ia meneruskan tugas ke **Service**:
-```java
+<!-- ```java -->
 studentService.getAllStudents();
 
 ### 4. **Service Memproses Logika Bisnis**
@@ -83,7 +83,7 @@ Semua interaksi database ada di layer Repository sehingga arsitektur tetap bersi
 
 ### 7. **Controller Mengirimkan Data ke Thymeleaf**
 Setelah menerima hasil dari Service, Controller mengirimkan data ke Template Engine (HTML) menggunakan:
-```java
+<!-- ```java -->
 model.addAttribute("students", listData);
 return "students-list";
 
