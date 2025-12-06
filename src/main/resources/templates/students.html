@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Daftar Mahasiswa</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+    <div class="container">
+        <h2>Daftar Mahasiswa</h2>
+
+        <div th:if="${message}" class="alert alert-success" th:text="${message}"></div>
+        <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+
+        <p>
+            <a th:href="@{/students/add}" class="btn btn-primary">Tambah Mahasiswa Baru</a>
+        </p>
+
+        <form th:action="@{/students}" method="get" class="form-search-filter">
+            <div class="form-group" style="display: flex; gap: 10px;">
+                <input type="text" name="keyword" th:value="${keyword}" placeholder="Cari berdasarkan Nama..."
+                    style="flex-grow: 1;">
+
+                <select name="major" id="major-filter">
+                    <option value="">Semua Jurusan</option>
+                    <option th:each="m : ${uniqueMajors}" th:value="${m}" th:text="${m}" th:selected="${m == major}">
+                    </option>
+                </select>
+
+                <button type="submit" class="btn btn-secondary">Cari/Filter</button>
+            </div>
+        </form>
+        <hr>
+
+        <table class="student-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nama</th>
+                    <th>Email</th>
+                    <th>Jurusan</th>
+                    <th>Tahun Masuk</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="student : ${students}">
+                    <td th:text="${student.id}"></td>
+                    <td th:text="${student.name}"></td>
+                    <td th:text="${student.email}"></td>
+                    <td th:text="${student.major}"></td>
+                    <td th:text="${student.registrationYear}"></td>
+                    <td>
+                        <a th:href="@{/students/edit/{id}(id=${student.id})}" class="btn btn-warning">Edit</a>
+                        <a th:href="@{/students/delete/{id}(id=${student.id})}"
+                            onclick="return confirm('Yakin ingin menghapus data ini?')" class="btn btn-danger">Hapus</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div th:if="${totalPages > 0}" class="pagination-controls" style="margin-top: 20px;">
+
+            <span th:if="${studentPage.hasPrevious()}">
+                <a th:href="@{/students(page=${currentPage - 1}, size=${studentPage.size}, keyword=${keyword}, major=${major})}"
+                    class="btn btn-sm btn-secondary">
+                    &laquo; Previous
+                </a>
+            </span>
+            <span th:unless="${studentPage.hasPrevious()}" class="btn btn-sm btn-secondary disabled">&laquo;
+                Previous</span>
+
+            Halaman:
+
+            <span th:each="i : ${#numbers.sequence(0, totalPages - 1)}">
+                <a th:if="${currentPage != i}"
+                    th:href="@{/students(page=${i}, size=${studentPage.size}, keyword=${keyword}, major=${major})}"
+                    class="btn btn-sm btn-secondary" th:text="${i + 1}"></a>
+                <span th:if="${currentPage == i}" class="btn btn-sm btn-primary" th:text="${i + 1}"></span>
+            </span>
+
+            <span th:if="${studentPage.hasNext()}">
+                <a th:href="@{/students(page=${currentPage + 1}, size=${studentPage.size}, keyword=${keyword}, major=${major})}"
+                    class="btn btn-sm btn-secondary">
+                    Next &raquo;
+                </a>
+            </span>
+            <span th:unless="${studentPage.hasNext()}" class="btn btn-sm btn-secondary disabled">Next &raquo;</span>
+
+        </div>
+</body>
+
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Mahasiswa</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="container">
+        <h2>Form Edit Mahasiswa</h2>
+        
+        <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+
+        <form th:action="@{/students/edit}" th:object="${student}" method="post">
+            
+            <input type="hidden" th:field="*{id}">
+            
+            <div class="form-group">
+                <label for="name">Nama:</label>
+                <input type="text" id="name" th:field="*{name}" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" th:field="*{email}" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="major">Jurusan:</label>
+                <input type="text" id="major" th:field="*{major}">
+            </div>
+            
+            <div class="form-group">
+                <label for="year">Tahun Masuk:</label>
+                <input type="number" id="year" th:field="*{registrationYear}" required>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Update Data</button>
+            <a th:href="@{/students}" class="btn btn-secondary">Batal</a>
+        </form>
+    </div>
+</body>
+</html>

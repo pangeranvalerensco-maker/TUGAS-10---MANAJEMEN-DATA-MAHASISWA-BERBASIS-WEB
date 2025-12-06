@@ -29,5 +29,5 @@ Aplikasi ini adalah implementasi sederhana dari pengelolaan data mahasiswa yang 
 ### 1. Kloning Proyek
 
 ```bash
-git clone [Link Repo Proyek Anda] 
-cd [TUGAS 10 - MANAJEMEN DATA MAHASISWA BERBASIS WEB]"# TUGAS-10---MANAJEMEN-DATA-MAHASISWA-BERBASIS-WEB" 
+git clone [https://github.com/pangeranvalerensco-maker/TUGAS-10---MANAJEMEN-DATA-MAHASISWA-BERBASIS-WEB.git] 
+cd "# TUGAS-10---MANAJEMEN-DATA-MAHASISWA-BERBASIS-WEB" 
